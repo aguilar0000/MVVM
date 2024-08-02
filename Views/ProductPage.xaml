@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MVVM.ViewModels"
+              xmlns:viewmodels="clr-namespace:MVVM.ViewModels"
+              
+             x:Class="MVVM.Views.ProductPage"
+             Title="Productos">
+
+    <ContentPage.BindingContext>
+        <viewmodels:ProductViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20">
+
+        
+        
+        <Label Text="Nombre" />
+        <Entry x:Name="NameEntry"  Text="{Binding Nombre}" Placeholder="Ingrese el nombre del producto" />
+
+        <Label Text="Descripción" />
+        <Entry x:Name="DescriptionEntry" Text="{Binding Descripción}" Placeholder="Ingrese la descripción del producto" />
+
+        <Label Text="Precio" />
+        <Entry x:Name="PriceEntry" Text="{Binding Precio}" Keyboard="Numeric" Placeholder="Ingrese el precio del producto" />
+
+        <Label Text="Foto" />
+        <Entry x:Name="photoUrlEntry" Text="{Binding Foto}" Placeholder="Ingrese la URL de la foto del producto" IsReadOnly="True" />
+
+        <Button Text="Tomar Foto" 
+                 WidthRequest="150"
+                HeightRequest="40"
+                 Padding="5"
+                 Margin="4"
+                Command="{Binding TakePhotoCommand}" />
+        
+        
+
+        <Button Text="Agregar Producto" 
+                 WidthRequest="150"
+                 HeightRequest="40"
+                 Padding="5"
+                 Margin="4"
+                Command="{Binding AddProductCommand}" />
+        
+        <Button Text="Cargar Productos" 
+                WidthRequest="150"
+                HeightRequest="40"
+                Padding="5"
+                Margin="4"
+                Clicked="OnLoadProductsClicked"/>
+
+        <Button Text="Seleccionar foto" 
+          WidthRequest="150"
+          HeightRequest="40"
+          Padding="5"
+          Margin="4"
+          Clicked="OnSelectPhotoClicked"/>
+
+        <Button Text="Actualizar Productos" 
+        WidthRequest="150"
+        HeightRequest="40"
+        Padding="5"
+        Margin="4"
+        Clicked="OnUpdateProductClicked"/>
+        
+        <Button Text="Eliminar Productos" 
+ WidthRequest="150"
+ HeightRequest="40"
+ Padding="5"
+ Margin="4"
+ Clicked="OnDeleteProductClicked"/>
+
+        <!--Lista para mostrar productos-->
+        <ListView x:Name="productsListView"  
+                  ItemSelected="OnProductSelected" 
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            
+                            <Label Text="{Binding Nombre}"  HorizontalOptions="StartAndExpand"/>
+                            <Label Text="{Binding Precio, StringFormat='Precio: {0:C}'}" HorizontalOptions="End"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+       
+    </StackLayout>
+
+        
+   
+</ContentPage>
